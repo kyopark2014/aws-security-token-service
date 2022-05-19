@@ -25,7 +25,7 @@ Temporary security credentials are not stored with the user but are generated dy
 
 ## AWS REST API Authentication (AWS SDK 이용)
 
-[AWS SDK를 이용한 AWS REST API Authentification](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)와 같이 AWS SDK를 이용하여 S3에 저장된 파일정보를 읽어 올 수 있습니다.
+[AWS SDK를 이용한 AWS REST API Authentification](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)와 같이 AWS SDK를 이용하여 S3에 저장된 파일정보를 읽어 올 수 있습니다. AWS SDK를 사용시 Temperary security credential을 사용하여 안전하게 REST API를 호출 할 수 있습니다. 
 
 ## Reference
 
