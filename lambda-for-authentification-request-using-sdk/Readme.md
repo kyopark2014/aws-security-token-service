@@ -4,90 +4,106 @@ AWS SDK를 이용하여 restful api로 S3의 파일에 대해 검색하고자 �
 
 ## AWS SDK로 인증요청을 테스트하기 위한 Lambda 생성
 
-1) [lambda-for-authentification-request-using-sdk](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-crypto](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)의 소스를 clone 합니다.
+1) [lambda-for-authentification-request-using-sdk](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)의 소스를 clone 합니다.
 
-2) Lambda console에서 "lambda-for-authentification-request-using-crypto"로 lambda를 생성합니다. 
+2) Lambda console에서 "lambda-for-authentification-request-using-sdk"로 lambda를 생성합니다. 
 
 https://ap-northeast-2.console.aws.amazon.com/lambda/home?region=ap-northeast-2#/functions
 
 3) 생성된 lambda의 environment variables을 아래와 같이 입력합니다. 
 
-![noname](https://user-images.githubusercontent.com/52392004/169189374-fdd7e7d1-a340-4ffb-bb7e-765b91068250.png)
+![noname](https://user-images.githubusercontent.com/52392004/169335866-03017f03-e7a7-4aca-91e5-67a25549e7b7.png)
 
-4) "lambda-for-authentification-request-using-crypto"을 [run]하여 결과를 확인 합니다. 
+4) lambda에 아래와 같이 S3에 대한 퍼미션을 부여합니다.
+
+```java
+{
+    "Effect": "Allow",
+    "Action": [
+        "s3:*",
+        "s3-object-lambda:*"
+    ],
+    "Resource": "*"
+}
+```        
+
+5) "lambda-for-authentification-request-using-sdk"을 [run]하여 결과를 확인 합니다. 
 
 ## 관련 코드 정리 
 
-[Authenticated Amazon S3 REST request](https://docs.aws.amazon.com/AmazonS3/latest/userguide/RESTAuthentication.html)와 같이 "Authorization" 헤더의 생성이 필요합니다. 
-
-[Authenticating Requests (AWS Signature Version 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html#auth-methods-intro)와 같이 "StringToSign"과 "Signing Key"를 생성하여 "Signature"를 생성하여야 합니다. 
-
-![image](https://user-images.githubusercontent.com/52392004/169191424-a6c603f3-fd4d-4f12-a493-b353541213f5.png)
-
-[Authenticating Requests: Using the Authorization Header (AWS Signature Version 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html)에 따라 canonicalReq을 생성합니다.
-
-![signature](https://user-images.githubusercontent.com/52392004/169192051-792e9eee-0570-493a-a10f-a074bc41d726.png)
-
-
+bucket 이름과 region을 조합하여 domain을 생성합니다. 
 
 ```java
-    var canonicalReq =  myMethod + '\n' +
-        myPath + '\n' +
-        '\n' +
-        'host:' + url + '\n' +
-        'x-amz-content-sha256:' + hashedPayload + '\n' +
-        'x-amz-date:' + amzDate + '\n' +
-        '\n' +
-        'host;x-amz-content-sha256;x-amz-date' + '\n' +
-        hashedPayload;
-```
-
-아래와 같이 "StringToSign"을 생성하고, Signature를 생성합니다.
-
-```java
-    var stringToSign =  'AWS4-HMAC-SHA256\n' +
-        amzDate + '\n' +
-        authDate+'/'+region+'/'+myService+'/aws4_request\n'+
-        canonicalReqHash;
-
-    var signingKey = getSignatureKey(crypto, secret_key, authDate, region, myService);
-```
-
-
-아래와 같이 authKey를 생성하고 authString을 만듧니다.
-
-
-```java
-    // Sign our String-to-Sign with our Signing Key
-    var authKey = crypto.HmacSHA256(stringToSign, signingKey);
-    console.log('authKey: '+authKey);
-
-    // Form our authorization header
-    var authString  = 'AWS4-HMAC-SHA256 ' +
-        'Credential='+
-        access_key+'/'+
-        authDate+'/'+
-        region+'/'+
-        myService+'/aws4_request,'+
-        'SignedHeaders=host;x-amz-content-sha256;x-amz-date,'+
-        'Signature='+authKey;
-```
-
-결과적으로 아래와 같은 header를 request에 사용할 수 있습니다. 
-
-```java
-    const headers = {
-        'Authorization' : authString,
-        'Host' : url,
-        'x-amz-date' : amzDate,
-        'x-amz-content-sha256' : hashedPayload
-    };
+    var region = process.env.AWS_DEFAULT_REGION;
+    var domain = bucketName+'.s3.'+region+'.amazonaws.com';
+    console.log('domain: '+domain);
 ```    
+
+http get에 대한 request는 아래와 같습니다. 
+
+```java
+    var myService = 's3';
+    var myMethod = 'GET';
+    var myPath = '/';
+    var body = '';
+
+    // Create the HTTP request
+    var request = new HttpRequest({
+        headers: {
+            'host': domain
+        },
+        hostname: domain,
+        method: myMethod,
+        path: myPath,
+        body: body,
+    });
+```    
+
+Sign된 request는 아래와 같이 구할 수 있습니다. 
+
+```java
+    var signer = new SignatureV4({
+        credentials: defaultProvider(),
+        region: region,
+        service: myService,
+        sha256: Sha256
+    });
+
+    var signedRequest;
+    try {
+        signedRequest = await signer.sign(request);
+        console.log('signedRequest: %j', signedRequest);
+
+    } catch(err) {
+        console.log(err);
+    }
+```
 
 
 ## 시험 결과
 
-아래와 같이 [Authenticating Requests (AWS Signature Version 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html#auth-methods-intro)에 따라 인증을 거쳐서 아래와 같이 Restful API로 S3의 파일정보를 확인 할 수 있습니다.
+signedRequest의 결과는 아래와 같습니다. 
+
+```java
+{
+    "method": "GET",
+    "hostname": "fileserver-authentification-test.s3.ap-northeast-2.amazonaws.com",
+    "query": {},
+    "headers": {
+        "host": "fileserver-authentification-test.s3.ap-northeast-2.amazonaws.com",
+        "x-amz-date": "20220519T151257Z",
+        "x-amz-security-token": "SampleZ2luX2VjEBcaDmFwLW5vcnRoZWFzdC0yIkYwRAIgByb0jgIaKMrrjkZd/6gWktf25aLoLezJV3W1uKt1QsECIH/UwyFftYQW1u4tBvX84j0sZz/P3Vlxi23X3oc4xe89Kq0CCPD//////////wEQABoMNjc3MTQ2NzUwODIyIgzhf/qDjRqq+r81p3IqgQKTr32UQ+l4PkAwMlFXbzzkRyp3F61jeXLsGW6MW5HQRIEGnC8WSYMGG8qaaRImCanTUUyucGWZLugNqtmbWjn2kwltIKlcKw0G8+RqfQXTLxEzIQJzfiP2XxNieEG8lyrPMj5Y3KMsrTFzOiyryyPVmmZIO9pcTMkQSVrtaIGA/yLM3mbwSP+oJfGsHxHcKpkNISKlzkZ+RnEhYfnzfFPVisexlB/ILv7I9X9wgMjoM/zxBEVJm/qwcCWrXkSJLsrto03VFqimF3pNCIy5ZSdEj+9/zs95WNA0BCU6LgwS9TJeZmb8mulR6Km6tLS/KwpgAPwCTLSC/6TRbXx3RfrCbzDyrJmUBjqbAXYE0PZeNPsn3NFl3wl4pI99oRwbB+pCLNfTnMvUsoMxMymNjOxy2NqY/AxCHZZm/26x0sG9lr9eIWHHWUBbJe96H1vZEMQHvrhQkiMmrSOdNB2kXrSJ0R823sKEf5KI0usVap0Kd0rC+XaJF3LoYUYldD+oY0aP547YcJqha5QbLPr3dtiCidEzbh0mTCoWTIHlhsv/lclS4HtG",
+        "x-amz-content-sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "authorization": "AWS4-HMAC-SHA256 Credential=SAMPLEKIXN5TFB4MVIHI/20220519/ap-northeast-2/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-security-token, Signature=sample587ef9cdf12fd740d1fe54b250978a370f1cbf06d051b7089b24a2b6a"
+    },
+    "body": "",
+    "protocol": "https:",
+    "path": "/"
+}
+```
+
+
+아래와 같이 Restful API로 S3의 파일정보를 확인 할 수 있습니다.
 
 ```java
 {
@@ -139,8 +155,6 @@ https://ap-northeast-2.console.aws.amazon.com/lambda/home?region=ap-northeast-2#
     }
 }
 ```
-
-
 
 ## Reference 
 
