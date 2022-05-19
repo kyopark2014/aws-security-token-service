@@ -82,7 +82,7 @@ Sign된 request는 아래와 같이 구할 수 있습니다.
 
 ## 시험 결과
 
-sign된 Request의  아래와 같습니다. 여기서 Temparary security credential이 이용되고 있음을 확인 할 수 있습니다.
+sign된 Request의 값은 아래와 같습니다. 여기서 Temparary security credential이 이용되고 있음을 확인 할 수 있습니다.
 
 ```java
 {
