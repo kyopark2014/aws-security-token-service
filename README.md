@@ -1,4 +1,4 @@
-# AWS STS (Security Token Service)
+# AWS STS를 이용한 Temparary security credential 활용하기 
 
 AWS Security Token Service (AWS STS) creates and provides trusted users with temporary security credentials that can control access to your AWS resources. Temporary security credentials work almost identically to the long-term access key credentials that your IAM users can use, with the following differences:
 
