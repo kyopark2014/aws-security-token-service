@@ -3,7 +3,7 @@
 Lambda Function URL은 외부에서 Lambda로 직접 접속 할 수 있어 편리하며, IAM 인증과 무인증(None)의 2가지 옵션을 제공하고 있습니다. 여기서는 Lambda Function URL의 인증방식을 AWS IAM으로 설정시에 Temparary Security Credential을 사용하여 접속하는 방법에 대해 설명합니다.
 
 
-## Lambda 생성 및 Functional URL 설정
+## Lambda 생성 및 Function URL 설정
 
 1) Lambda Console에 접속하여 [Create function]을 선택합니다.
 
