@@ -10,8 +10,6 @@ exports.handler = async (event, context) => {
     console.log('## ENVIRONMENT VARIABLES: ' + JSON.stringify(process.env))
     console.log('## EVENT: ' + JSON.stringify(event))
     
-    console.log('AWS_ACCESS_KEY_ID: '+process.env.AWS_ACCESS_KEY_ID);
-    console.log('AWS_SECRET_ACCESS_KEY: '+process.env.AWS_SECRET_ACCESS_KEY);
     console.log('AWS_DEFAULT_REGION: '+process.env.AWS_DEFAULT_REGION);
         
     var region = process.env.AWS_DEFAULT_REGION;
