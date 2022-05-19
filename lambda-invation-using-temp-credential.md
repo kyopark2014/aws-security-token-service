@@ -1,8 +1,6 @@
 # Temparary Security credential 을 이용하여 Lambda Function URL 접속
 
-Lambda Function URL은 외부에서 Lambda로 직접 접속 할 수 있어 편리하지만 보안에 대해 충분히 고려하여야 합니다. Lambda Function URL은 아래와 같이 2가지 Auth type을 제공하고 있고, 여기서는 AWS IAM으로 설정시에 Temparary Security Credential을 사용하여 접속하는 방법에 대해 설명합니다.
-
-![image](https://user-images.githubusercontent.com/52392004/169071431-5d1e1c2e-5be8-41ce-bbaa-fb9baaa7cf76.png)
+Lambda Function URL은 외부에서 Lambda로 직접 접속 할 수 있어 편리하며, IAM 인증과 무인증(None)의 2가지 옵션을 제공하고 있습니다. 여기서는 Lambda Function URL의 인증방식을 AWS IAM으로 설정시에 Temparary Security Credential을 사용하여 접속하는 방법에 대해 설명합니다.
 
 
 ## Lambda 생성 및 Functional URL 설정
