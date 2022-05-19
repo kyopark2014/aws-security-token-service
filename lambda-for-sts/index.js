@@ -1,4 +1,3 @@
-   
 const aws = require('aws-sdk');
 
 const {STSClient, AssumeRoleCommand}  = require('@aws-sdk/client-sts');
@@ -9,7 +8,7 @@ exports.handler = async (event, context) => {
     console.log('## EVENT: ' + JSON.stringify(event))
     
     const params = {
-      RoleArn: 'arn:aws:iam::677146750822:role/role-for-s3-fileserver',
+      RoleArn: 'arn:aws:iam::123456789012:role/role-for-s3-fileserver',
       RoleSessionName: 'session',
     };
     const assumeRoleCommand = new AssumeRoleCommand(params);
