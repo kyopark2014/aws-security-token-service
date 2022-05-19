@@ -21,7 +21,7 @@ https://ap-northeast-2.console.aws.amazon.com/lambda/home?region=ap-northeast-2#
 
 
 
-## STS에 접속하여 temparary Security Credential 받아오기 
+## STS에 접속하여 Temparary security credential 받아오기 
 
 1) "role-for-lambda-invocation"을 만들기 위해, 먼저 "lambda-full-access"을 생성합니다. 
 
