@@ -103,7 +103,7 @@ signedRequest의 결과는 아래와 같습니다. 여기서 Temparary security 
 ```
 
 
-아래와 같이 Restful API로 S3의 파일정보를 확인 할 수 있습니다.
+Sigened header와 body를 이용해 S3 domain으로 request를 보내면, 아래와 같이 S3의 파일정보를 확인 할 수 있습니다.
 
 ```java
 {
