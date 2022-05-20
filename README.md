@@ -35,7 +35,7 @@ Temporary security credentials are not stored with the user but are generated dy
 
 ### Node.JS Client에서 Temparary security credential를 이용하여 S3 파일 리스트 확인 (예제) 
 
-[Node.JS로 된 독립된 Client가 Temparary security credential을 이용하여 S3에 있는 파일 리스트](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-s3get.md)확인 합니다. 
+[Node.JS로 된 독립된 Client가 Temparary security credential을 이용하여 S3에 있는 파일 리스트](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-s3get.md)를 확인 합니다. 
 
 ### Node.JS Client에서 Temparary security credential를 이용하여 Lambda Function URL에 요청 (예제)
 
