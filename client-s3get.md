@@ -92,3 +92,56 @@ $ node client-s3get.js
     aws.config.credentials.accessKeyId = data.Credentials.AccessKeyId;
     aws.config.credentials.sessionToken = data.Credentials.SessionToken;
     console.log("modified credentials: %j", aws.config.credentials);
+```
+
+아래와 같이 하여 signatue를 구합니다. 
+
+```java
+    var region = 'ap-northeast-2';
+    var domain = bucketName+'.s3.'+region+'.amazonaws.com';
+    
+    console.log('domain: '+domain);
+
+    var myService = 's3';
+    var myMethod = 'GET';
+    var myPath = '/';
+    var body = '';
+
+    // Create the HTTP request
+    var request = new HttpRequest({
+        headers: {
+            'host': domain
+        },
+        hostname: domain,
+        method: myMethod,
+        path: myPath,
+        body: body,
+    });
+    console.log('request: %j', request);
+
+    // Sign the request
+    var signer = new SignatureV4({
+        credentials: defaultProvider(),
+        region: region,
+        service: myService,
+        sha256: Sha256
+    });
+    console.log('signer: %j', signer);
+```
+
+S3에 저장된 파일 정보를 아래와 같이 조회합니다.
+
+```java
+// request
+    performRequest(domain, signedRequest.headers, signedRequest.body, myPath, myMethod, function(response) {    
+        // parse the response from our function and write the results to the console
+        xml.parseString(response, function (err, result) {
+            if(err) {
+                console.log('err: '+err);
+            }
+            else {
+                console.log('result: %j', result);
+            };
+        });
+    });
+```    
