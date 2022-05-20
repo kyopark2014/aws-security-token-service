@@ -35,11 +35,11 @@ Temporary security credentials are not stored with the user but are generated dy
 
 ## Node.JS Client에서 AWS SDK를 이용한 S3 파일 리스트 확인 (예제)
 
-[Node.JS로 된 독립된 Client를 이용해서 S3에 있는 파일 리스트]를 확인 합니다. 
+[Node.JS로 된 독립된 Client가 Temparary Security Credential을 이용하여 S3에 있는 파일 리스트]를 확인 합니다. 
 
 ## Node.JS Client에서 Lambda Function URL로 IAM을 이용해 요청 (예제)
 
-[Node.JS로 된 독립된 Client를 이용하여 Lambda Funtion URL에 접속]을 요청하고 응답을 확인 할 수 있습니다. 
+[Node.JS로 된 독립된 Client가 Temparary Security Credential을 이용하여 Lambda Funtion URL에 접속]을 요청하고 응답을 확인 할 수 있습니다. 
 
 ## Reference
 
