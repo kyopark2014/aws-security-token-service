@@ -3,20 +3,41 @@ const { HttpRequest} = require("@aws-sdk/protocol-http");
 const { defaultProvider } = require("@aws-sdk/credential-provider-node");
 const { SignatureV4 } = require("@aws-sdk/signature-v4");
 const { Sha256 } = require("@aws-crypto/sha256-browser");
+const {STSClient, AssumeRoleCommand}  = require('@aws-sdk/client-sts');
+const sTS = new STSClient({region: 'ap-northeast-2'});
 
 var https = require('https');
 var xml = require('xml2js');
 
 const aws = require("aws-sdk");
 aws.config.getCredentials(function(err) {
-  if (err) console.log(err.stack);
-  else {
-    console.log("Access key:", aws.config.credentials.accessKeyId);
-  }
+    if (err) console.log(err.stack);
+    else {
+        console.log("Access key:", aws.config.credentials.accessKeyId);
+    }
 });
-console.log("full credentials: %j", aws.config.credentials);
+console.log("current credentials: %j", aws.config.credentials);
 
 const run = async () => {
+    const params = {
+        RoleArn: 'arn:aws:iam::123456789012:role/role-for-s3-fileserver',
+        RoleSessionName: 'session',
+    };
+    const assumeRoleCommand = new AssumeRoleCommand(params);
+    
+    let data;
+    try {
+        data = await sTS.send(assumeRoleCommand);
+    
+        console.log('data: %j',data);
+    } catch (error) {
+          console.log(error);
+    }
+
+    aws.config.credentials.accessKeyId = data.Credentials.AccessKeyId;
+    aws.config.credentials.sessionToken = data.Credentials.SessionToken;
+    console.log("modified credentials: %j", aws.config.credentials);
+
     var region = 'ap-northeast-2';
     var domain = 'hgwavninyisqd6utbvywn7drpe0mvkwp.lambda-url.ap-northeast-2.on.aws';
     
