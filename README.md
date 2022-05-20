@@ -23,13 +23,23 @@ Temporary security credentials are not stored with the user but are generated dy
 
 [Temparary Security credential 을 이용하여 Lambda Function URL 접속](https://github.com/kyopark2014/aws-security-token-service/blob/main/lambda-invation-using-temp-credential.md)에 따라 Lambda Function URL로 Temparary security credential을 이용해 API를 호출 할 수 있습니다.
 
-## AWS REST API Authentication (Crypto 이용)
+## AWS REST API Authentication 
+
+### Lambda에서 Crypto 이용하여 S3 파일 리스트 확인 (예제)
 
 [Crypto를 이용한 AWS REST API Authentication](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-crypto)와 같이 [Signing AWS requests with Signature Version 4](https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html)을 이용하여 S3에 저장된 파일 정보를 읽어 올 수 있습니다. 
 
-## AWS REST API Authentication (AWS SDK 이용)
+### Lambda에서 AWS SDK를 이용하여 S3 파일 리스트 확인 (예제)
 
-[AWS SDK를 이용한 AWS REST API Authentification](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)와 같이 AWS SDK를 이용하여 S3에 저장된 파일정보를 읽어 올 수 있습니다. AWS SDK를 사용시 Temperary security credential을 사용하여 안전하게 REST API를 호출 할 수 있습니다. 
+[AWS SDK를 이용한 AWS REST API Authentification](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)와 같이 AWS SDK를 이용하여 S3에 저장된 파일정보를 읽어 올 수 있습니다. Lambda는 Temparary security credential을 Environment variable로 사용하므로 별도 구현없이 AWS SDK 안전하게 REST API를 호출 할 수 있습니다. 
+
+### Node.JS Client에서 AWS SDK를 이용한 S3 파일 리스트 확인 (예제) 
+
+[Node.JS로 된 독립된 Client가 Credential을 이용하여 S3에 있는 파일 리스트](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-s3get.md)를 이용하여 S3의 파일 리스트를 확인 합니다. (AWS SDK를 이용해 Temparary security credential을 가져오는 로직 추가 구현중)
+
+### Node.JS Client에서 Lambda Function URL로 IAM을 이용해 요청 (예제)
+
+[Node.JS로 된 독립된 Client가 Lambda Funtion URL에 접속](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-url.md)을 요청하고 응답을 확인 할 수 있습니다. (AWS SDK를 이용해 Temparary security credential을 가져오는 로직 추가 구현중)
 
 ## Reference
 
