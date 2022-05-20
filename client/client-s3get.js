@@ -21,6 +21,7 @@ console.log("current credentials: %j", aws.config.credentials);
 const bucketName = 'fileserver-authentification-test';  // bucket name
 
 const run = async () => {
+    // get temperary security credential using STS 
     const params = {
         RoleArn: 'arn:aws:iam::123456789012:role/role-for-s3-fileserver',
         RoleSessionName: 'session',
@@ -36,6 +37,7 @@ const run = async () => {
           console.log(error);
     }
 
+    // update credential
     aws.config.credentials.accessKeyId = data.Credentials.AccessKeyId;
     aws.config.credentials.sessionToken = data.Credentials.SessionToken;
     console.log("modified credentials: %j", aws.config.credentials);
