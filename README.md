@@ -1,6 +1,6 @@
 # AWS STS를 이용한 Temparary security credential 활용하기 
 
-[Lambda의 Function UR](https://aws.amazon.com/ko/about-aws/whats-new/2022/04/aws-lambda-function-urls-built-in-https-endpoints/)와 같이 IAM을 이용하여 REST api를 호출할때는 보안상 Temparary security credential을 사용하는 것이 바람직합니다. 여기에서는 AWS CLI 또는 Amazon Lambda를 이용해 Temparary security credential을 생성한후, Lambda Function URL을 호출할때 사용하고, Crypto와 AWS SDK를 이용해 REST API로 S3를 호출하는 예제를 제공합니다.
+[Lambda의 Function UR](https://aws.amazon.com/ko/about-aws/whats-new/2022/04/aws-lambda-function-urls-built-in-https-endpoints/)와 같이 IAM을 이용하여 REST api를 호출할때는 보안상 Temparary security credential을 사용하는 것이 바람직합니다. 여기에서는 AWS CLI 또는 Amazon Lambda를 이용해 Temparary security credential을 생성하여 Lambda Function URL을 호출할때 사용하고, Crypto와 AWS SDK를 이용해 REST API로 S3를 호출하는 예제를 제공합니다.
 
 ## Temporary security credential 
 
