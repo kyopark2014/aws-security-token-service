@@ -12,7 +12,7 @@
 $ node client-url.js
 ```
 
-3) 실행시 얻어진 정보는 아래와 같습니다. 
+3) 실행시 얻어진 결과는 아래와 같습니다. 아래는 테스트를 위해 Lambda 기본코드를 그대로 사용하였으므로 "Hello from Lambda"를 응답으로 받습니다.  
 
 ```java
 response: "\"Hello from Lambda!\""
