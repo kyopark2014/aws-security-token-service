@@ -56,7 +56,14 @@ https://us-east-1.console.aws.amazon.com/iamv2/home#/roles
 }
 ```    
 
-[Lambda를 이용한 STS 연결](https://github.com/kyopark2014/aws-security-token-service/blob/main/lambda-for-sts/index.js)과 같이 아래처럼 
+[Lambda를 이용한 STS 연결](https://github.com/kyopark2014/aws-security-token-service/blob/main/lambda-for-sts/index.js)과 같이 아래처럼 AWS API를 통해 STS로부터 temperary credential을 생성할 수 있습니다. 
+
+```java
+const aws = require('aws-sdk');
+
+const {STSClient, AssumeRoleCommand}  = require('@aws-sdk/client-sts');
+const sTS = new STSClient({region: 'ap-northeast-2'});
+
     try {
         const data = await sTS.send(assumeRoleCommand);
 
@@ -66,7 +73,7 @@ https://us-east-1.console.aws.amazon.com/iamv2/home#/roles
     } catch (error) {
         console.log(error);
     }
-
+```
 
 ## Test 결과 
 
