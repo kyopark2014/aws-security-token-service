@@ -57,6 +57,17 @@ https://us-east-1.console.aws.amazon.com/iamv2/home#/roles
 ```    
 
 
+    try {
+        const data = await sTS.send(assumeRoleCommand);
+
+        console.log('data: %j',data);
+        
+        // do something
+    } catch (error) {
+        console.log(error);
+    }
+
+
 ## Test 결과 
 
 1) Lambda에시 실행합니다. 
