@@ -56,7 +56,7 @@ https://us-east-1.console.aws.amazon.com/iamv2/home#/roles
 }
 ```    
 
-
+[Lambda를 이용한 STS 연결](https://github.com/kyopark2014/aws-security-token-service/blob/main/lambda-for-sts/index.js)과 같이 아래처럼 
     try {
         const data = await sTS.send(assumeRoleCommand);
 
