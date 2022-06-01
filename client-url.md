@@ -2,7 +2,7 @@
 
 ## 설치 및 실행 결과 
 
-여기에서는 Node.JS로 된 독립된 Client가 Temparary security credential을 이용하여 S3에 있는 파일 리스트를 확인 합니다.
+여기에서는 Node.JS로 된 독립된 Client가 Temparary security credential을 이용하여 IAM인증을 통해 Lambda Function URL을 가진 Lambda를 호출 합니다. 
 
 1) [관련 코드](https://github.com/kyopark2014/aws-security-token-service/tree/main/client)를 디렉토리 포함하여 다운로드 받습니다. 
 
