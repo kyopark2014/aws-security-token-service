@@ -13,11 +13,11 @@ Temporary security credentials are not stored with the user but are generated dy
 
 ## AWS CLI를 이용한 Temporary security credential 생성하기 
 
-[AWS CLI를 이용한 temporary secruity credential](https://github.com/kyopark2014/aws-security-token-service/blob/main/credential-using-aws-cli.md)에서는 AWS CLI를 이용한 temparary security credential을 생성하는 방법을 설명합니다. 
+[AWS CLI를 이용한 temporary secruity credential](https://github.com/kyopark2014/aws-security-token-service/blob/main/credential-using-aws-cli.md)에서는 AWS CLI를 이용한 temporary security credential을 생성하는 방법을 설명합니다. 
 
 ## Lambda 를 이용하여 Temporary security credential 생성하기 
 
-[lambda-for-sts](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-sts)에서는 lambda를 이용하여 STS에 접속해, temparary security credential를 얻어오는 과정을 설명합니다. 
+[lambda-for-sts](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-sts)에서는 lambda를 이용하여 STS에 접속해, temporary security credential를 얻어오는 과정을 설명합니다. 
 
 ## Temporary security credential로 Lambda Function URL 호출하기 
 
