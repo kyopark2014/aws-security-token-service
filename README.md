@@ -11,17 +11,17 @@ Temporary security credentials are short-term, as the name implies. They can be 
 Temporary security credentials are not stored with the user but are generated dynamically and provided to the user when requested. When (or even before) the temporary security credentials expire, the user can request new credentials, as long as the user requesting them still has permissions to do so.
 
 
-## AWS CLI를 이용한 Temparary security credential 생성하기 
+## AWS CLI를 이용한 Temporary security credential 생성하기 
 
-[AWS CLI를 이용한 temparary secruity credential](https://github.com/kyopark2014/aws-security-token-service/blob/main/credential-using-aws-cli.md)에서는 AWS CLI를 이용한 temparary security credential을 생성하는 방법을 설명합니다. 
+[AWS CLI를 이용한 temporary secruity credential](https://github.com/kyopark2014/aws-security-token-service/blob/main/credential-using-aws-cli.md)에서는 AWS CLI를 이용한 temparary security credential을 생성하는 방법을 설명합니다. 
 
-## Lambda 를 이용하여 Temparary security credential 생성하기 
+## Lambda 를 이용하여 Temporary security credential 생성하기 
 
 [lambda-for-sts](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-sts)에서는 lambda를 이용하여 STS에 접속해, temparary security credential를 얻어오는 과정을 설명합니다. 
 
-## Temparary security credential로 Lambda Function URL 호출하기 
+## Temporary security credential로 Lambda Function URL 호출하기 
 
-[Temparary Security credential 을 이용하여 Lambda Function URL 접속](https://github.com/kyopark2014/aws-security-token-service/blob/main/lambda-invation-using-temp-credential.md)에 따라 Lambda Function URL로 Temparary security credential을 이용해 API를 호출 할 수 있습니다.
+[Temporary Security credential 을 이용하여 Lambda Function URL 접속](https://github.com/kyopark2014/aws-security-token-service/blob/main/lambda-invation-using-temp-credential.md)에 따라 Lambda Function URL로 Temporary security credential을 이용해 API를 호출 할 수 있습니다.
 
 ## AWS REST API Authentication 
 
@@ -31,15 +31,17 @@ Temporary security credentials are not stored with the user but are generated dy
 
 ### Lambda에서 AWS SDK를 이용하여 S3 파일 리스트 확인
 
-[AWS SDK를 이용한 AWS REST API Authentification](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)와 같이 AWS SDK를 이용하여 S3에 저장된 파일정보를 읽어 올 수 있습니다. Lambda는 Temparary security credential을 Environment variable로 사용하므로 별도 구현없이 AWS SDK 안전하게 REST API를 호출 할 수 있습니다. 
+[AWS SDK를 이용한 AWS REST API Authentification](https://github.com/kyopark2014/aws-security-token-service/tree/main/lambda-for-authentification-request-using-sdk)와 같이 AWS SDK를 이용하여 S3에 저장된 파일정보를 읽어 올 수 있습니다. Lambda는 Temporary security credential을 Environment variable로 사용하므로 별도 구현없이 AWS SDK 안전하게 REST API를 호출 할 수 있습니다. 
 
-### Node.JS Client에서 Temparary security credential를 이용하여 S3 파일 리스트 확인 
+### Node.JS Client에서 Temporary security credential를 이용하여 S3 파일 리스트 확인 
 
-[Node.JS로 된 독립된 Client가 Temparary security credential을 이용하여 S3에 있는 파일 리스트](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-s3get.md)를 확인 합니다. 
+[Node.JS로 된 독립된 Client가 Temporary security credential을 이용하여 S3에 있는 파일 리스트](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-s3get.md)를 확인 합니다. 
 
-### Node.JS Client에서 Temparary security credential를 이용하여 Lambda Function URL에 요청 
+### Node.JS Client에서 Temporary security credential를 이용하여 Lambda Function URL에 요청 
 
-[Node.JS로 된 독립된 Client가 Temparary security credential을 이용하여 Lambda Funtion URL에 접속](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-url.md)을 요청하고 응답을 확인 할 수 있습니다. 
+[Node.JS로 된 독립된 Client가 Temporary security credential을 이용하여 Lambda Funtion URL에 접속](https://github.com/kyopark2014/aws-security-token-service/blob/main/client-url.md)을 요청하고 응답을 확인 할 수 있습니다. 
+
+[Lambda Functional URL](https://github.com/kyopark2014/lambda-function-url)은 AWS CDK를 이용한 구현 및 Temporary security credetion을 이용한 client 이용해 DynamodB애 데이터를 저장하고 읽어오는 실제적인 예를 보여줍니다. 
 
 ## Reference
 
