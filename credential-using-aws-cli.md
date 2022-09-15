@@ -33,7 +33,7 @@
 aws sts get-caller-identity --query Account --output text
 ````
 
-계정번호를 아래와 같이 입력합니다. 여기서는 계정번호가 123456789012라고 가정하였고, 기존에 "role-for-s3-fileserver"라는 IAM Role이 있다고 가정하였습니다. 
+계정번호를 아래와 같이 입력합니다. 여기서는 계정번호가 123456789012라고 가정하였고, [IAM Role 생성](https://github.com/kyopark2014/aws-security-token-service/blob/main/credential-using-aws-cli.md#iam-role-%EC%83%9D%EC%84%B1)에서 생성한 "role-for-s3-fileserver"을 이용합니다.
 
 ```c
 aws sts assume-role --role-arn arn:aws:iam::123456789012:role/role-for-s3-fileserver --role-session-name "RoleSession1"
