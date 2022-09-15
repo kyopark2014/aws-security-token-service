@@ -27,8 +27,11 @@
 
 ## AWS CLI에서 생성하기 
 
+계정번호를 
+## AWS CLI에서 생성하기 
+
 ```c
-$ aws sts assume-role --role-arn arn:aws:iam::123456789012:role/role-for-s3-fileserver --role-session-name "RoleSession1"
+aws sts assume-role --role-arn arn:aws:iam::123456789012:role/role-for-s3-fileserver --role-session-name "RoleSession1"
 ```
 
 아래와 같이 생성된 Temparary Security Credential을 확인 할 수 있습니다. 
