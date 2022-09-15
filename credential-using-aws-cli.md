@@ -27,8 +27,13 @@
 
 ## AWS CLI에서 생성하기 
 
-계정번호를 
-## AWS CLI에서 생성하기 
+아래 명령어로 계정번호를 확인합니다.
+
+```c
+aws sts get-caller-identity --query Account --output text
+````
+
+계정번호를 아래와 같이 입력합니다. 여기서는 계정번호가 123456789012라고 가정하였고, 기존에 "role-for-s3-fileserver"라는 IAM Role이 있다고 가정하였습니다. 
 
 ```c
 aws sts assume-role --role-arn arn:aws:iam::123456789012:role/role-for-s3-fileserver --role-session-name "RoleSession1"
