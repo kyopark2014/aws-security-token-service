@@ -1,4 +1,4 @@
-# AWS CLI를 이용한 temparary security credential 생성하기 
+# AWS CLI를 이용한 Temporary security credential 생성하기 
 
 ## IAM Role 생성
 "role-for-s3-fileserver"과 같은 IAM Role을 미리 생성하여야 하는데, 아래처럼 Trust relationships에 사용자 계정(여기서는 "myid")을 반드시 추가하여야 합니다. 
